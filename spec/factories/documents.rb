@@ -2,13 +2,17 @@
 
 # == Schema Information
 #
-# Table name: libraries
+# Table name: documents
 #
 #  id         :bigint(8)        not null, primary key
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-class Library < ApplicationRecord
-  has_one_attached :document
+FactoryBot.define do
+  factory :document do
+    trait :with_file do
+      documents { fixture_file_upload(Rails.root.join('erd.pdf'), 'application/pdf') }
+    end
+  end
 end
